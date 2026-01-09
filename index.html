@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Orbix Community - Tools & Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --accent-blue: #60a5fa;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --dark-gray: #334155;
+            --shadow: 0 4px 12px rgba(30, 58, 138, 0.1);
+            --radius: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .logo-text p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Logo Animation Container */
+        .logo-animation {
+            width: 180px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-tm {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--accent-blue);
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            opacity: 0;
+            animation: fadeInTM 2s forwards 1.5s;
+        }
+
+        .logo-orbix {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-orbix::before {
+            content: "ORBIX";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            color: var(--white);
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 1.5s steps(6) forwards;
+        }
+
+        .logo-community {
+            font-size: 18px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 5px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: slideUp 0.8s forwards 1.8s;
+        }
+
+        .logo-circle {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border: 3px solid var(--accent-blue);
+            border-radius: 50%;
+            opacity: 0;
+            animation: circleExpand 1s forwards 0.5s;
+        }
+
+        .logo-circle::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-blue);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s infinite 1.5s;
+        }
+
+        /* Logo Animations */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInTM {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes circleExpand {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            70% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        nav a:hover {
+            opacity: 0.9;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--white);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(to right, var(--light-blue), var(--white));
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--dark-gray);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-blue);
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary-blue);
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--secondary-blue);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-blue);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 18px;
+            color: var(--dark-gray);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            font-size: 17px;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Tools Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .tool-card {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .tool-icon {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+
+        .tool-content {
+            padding: 25px;
+        }
+
+        .tool-content h3 {
+            font-size: 22px;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .tool-content p {
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        .tool-link {
+            display: inline-block;
+            color: var(--secondary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tool-link:hover {
+            color: var(--primary-blue);
+            gap: 8px;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: var(--white);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-blue);
+        }
+
+        .footer-column p, .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 15px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .hero h2 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 25px;
+                right: 20px;
+            }
+
+            nav {
+                width: 100%;
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+            }
+
+            nav li {
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .logo-animation {
+                width: 160px;
+                height: 70px;
+            }
+
+            .logo-orbix {
+                font-size: 28px;
+            }
+
+            .logo-community {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-animation {
+                width: 140px;
+                height: 60px;
+            }
+
+            .logo-orbix {
+                font-size: 24px;
+            }
+
+            .logo-community {
+                font-size: 14px;
+            }
+
+            .logo-circle {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-animation">
+                    <div class="logo-tm">TM</div>
+                    <div class="logo-circle"></div>
+                    <div class="logo-orbix">ORBIX</div>
+                    <div class="logo-community">Community</div>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">Tentang</a></li>
+                    <li><a href="#vision">Visi & Misi</a></li>
+                    <li><a href="#tools">Tools</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Selamat Datang di Home Orbix Community</h2>
+            <p>Platform komunitas yang menyediakan berbagai tools dan resources untuk membantu pengembangan diri, kolaborasi, dan inovasi dalam teknologi serta kehidupan sehari-hari.</p>
+            <a href="#tools" class="cta-button">Jelajahi Tools Kami</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tentang Home Orbix</h2>
+                <p>Komunitas yang dibangun untuk menghubungkan para profesional, pengembang, dan kreator dari berbagai latar belakang untuk berkolaborasi dan berinovasi bersama.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Apa itu Home Orbix Community?</h3>
+                    <p>Home Orbix Community adalah sebuah platform yang menghubungkan individu-individu kreatif dan profesional dari berbagai bidang teknologi, desain, bisnis, dan pengembangan diri.</p>
+                    <p>Kami menyediakan berbagai tools dan resources yang dapat dimanfaatkan oleh anggota komunitas untuk mempercepat proses belajar, berkolaborasi, dan menciptakan solusi inovatif.</p>
+                    <p>Dengan fokus pada kolaborasi dan pertukaran pengetahuan, kami bertujuan untuk menciptakan ekosistem yang mendukung pertumbuhan bersama.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Home Orbix Community">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Mission Section -->
+    <section id="vision" style="background-color: var(--light-blue);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Visi & Misi</h2>
+                <p>Panduan dan arah yang menjadi fondasi dari Home Orbix Community</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Visi Misi Home Orbix">
+                </div>
+                <div class="about-text">
+                    <h3>Visi Kami</h3>
+                    <p>Menjadi komunitas terdepan yang menghubungkan para profesional dan kreator untuk menciptakan solusi inovatif yang berdampak positif pada masyarakat melalui teknologi dan kolaborasi.</p>
+                    
+                    <h3 style="margin-top: 30px;">Misi Kami</h3>
+                    <p><strong>1. Membangun Ekosistem Kolaboratif</strong> - Menyediakan platform yang memudahkan anggota untuk berkolaborasi dan berbagi pengetahuan.</p>
+                    <p><strong>2. Menyediakan Tools Berkualitas</strong> - Mengembangkan dan menyediakan berbagai tools yang membantu produktivitas dan pengembangan diri.</p>
+                    <p><strong>3. Mendorong Inovasi</strong> - Menciptakan lingkungan yang mendukung eksperimen dan pengembangan solusi kreatif.</p>
+                    <p><strong>4. Memberikan Akses yang Setara</strong> - Memastikan semua anggota memiliki akses yang sama terhadap resources dan peluang.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tools & Resources</h2>
+                <p>Berbagai alat dan sumber daya yang kami sediakan untuk mendukung aktivitas komunitas</p>
+            </div>
+            <div class="tools-grid">
+                <!-- Tool 1 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Code Collaboration</h3>
+                        <p>Platform untuk berkolaborasi dalam pengembangan kode secara real-time dengan fitur code review dan version control.</p>
+                        <a href="#" class="tool-link">Akses Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Tool 2 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Project Management</h3>
+                        <p>Tools untuk mengelola proyek komunitas dengan fitur task assignment, progress tracking, dan timeline visualization.</p>
+                        <a href="#" class="tool-link">Akses Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Tool 3 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Learning Resources</h3>
+                        <p>Kumpulan materi pembelajaran, tutorial, dan kursus online untuk pengembangan skill di berbagai bidang teknologi.</p>
+                        <a href="#" class="tool-link">Akses Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Tool 4 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Community Forum</h3>
+                        <p>Forum diskusi untuk bertukar ide, mencari solusi, dan berinteraksi dengan anggota komunitas lainnya.</p>
+                        <a href="#" class="tool-link">Akses Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Tool 5 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Template Library</h3>
+                        <p>Koleksi template untuk website, presentasi, dokumen, dan desain yang dapat digunakan secara gratis.</p>
+                        <a href="#" class="tool-link">Akses Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Tool 6 -->
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Event Management</h3>
+                        <p>Sistem untuk mengatur event komunitas, webinar, workshop, dan pertemuan dengan fitur RSVP dan reminder.</p>
+                        <a href="#" class="tool-link">Akses Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Anggota Komunitas</p>
+                </div>
+                <div class="stat-item">
+                    <h3>25+</h3>
+                    <p>Tools Tersedia</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>Proyek Selesai</p>
+                </div>
+                <div class="stat-item">
+                    <h3>12+</h3>
+                    <p>Event Bulanan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="logo-animation" style="width: 200px; height: 90px; margin-bottom: 20px;">
+                        <div class="logo-tm">TM</div>
+                        <div class="logo-circle"></div>
+                        <div class="logo-orbix">ORBIX</div>
+                        <div class="logo-community">Community</div>
+                    </div>
+                    <p>Komunitas yang menghubungkan para profesional dan kreator untuk berkolaborasi dan berinovasi melalui teknologi.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Cepat</h3>
+                    <a href="#home">Home</a>
+                    <a href="#about">Tentang Kami</a>
+                    <a href="#vision">Visi & Misi</a>
+                    <a href="#tools">Tools</a>
+                    <a href="#contact">Kontak</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Tools Populer</h3>
+                    <a href="#">Code Collaboration</a>
+                    <a href="#">Project Management</a>
+                    <a href="#">Learning Resources</a>
+                    <a href="#">Community Forum</a>
+                    <a href="#">Template Library</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Bali, Indonesia - Philipina</p>
+                    <p><i class="fas fa-envelope"></i> info @Orbix.Community</p>
+                    <p><i class="fas fa-phone"></i> +63 930 270 7480</p>
+                    <p><i class="fas fa-clock"></i> Senin - Jumat: 9:00 - 17:00</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2020 Home Orbix Community. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+            
+            // Toggle icon between bars and times
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    const nav = document.getElementById('mainNav');
+                    const menuBtnIcon = document.querySelector('#mobileMenuBtn i');
+                    
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                        menuBtnIcon.classList.remove('fa-times');
+                        menuBtnIcon.classList.add('fa-bars');
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add animation to stats counter
+        const statsSection = document.querySelector('.stats');
+        const statNumbers = document.querySelectorAll('.stat-item h3');
+        let animated = false;
+
+        function animateStats() {
+            if (!animated && isElementInViewport(statsSection)) {
+                animated = true;
+                
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.textContent);
+                    let current = 0;
+                    const increment = target / 100;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = Math.floor(current) + (stat.textContent.includes('+') ? '+' : '');
+                    }, 20);
+                });
+            }
+        }
+
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
+            );
+        }
+
+        // Listen for scroll events
+        window.addEventListener('scroll', animateStats);
+        
+        // Initial check in case stats are already in viewport on page load
+        animateStats();
+
+        // Restart logo animation when clicking on logo
+        document.querySelectorAll('.logo-animation').forEach(logo => {
+            logo.addEventListener('click', function() {
+                // Reset animation by removing and re-adding the element
+                const parent = this.parentNode;
+                const clone = this.cloneNode(true);
+                parent.replaceChild(clone, this);
+            });
+        });
+    </script>
+</body>
+</html>
